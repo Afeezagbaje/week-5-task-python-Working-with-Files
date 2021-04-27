@@ -7,7 +7,7 @@ class IReadingFiles(ABC):
         pass
 
     @abstractmethod
-    def iterator_content(self):
+    def iterator(self):
         pass
 
     @abstractmethod
