@@ -1,4 +1,4 @@
-from interface import IReadingFiles
+from .interface import IReadingFiles
 
 
 class ReadBytesFromFile(IReadingFiles):
@@ -19,6 +19,7 @@ class ReadBytesFromFile(IReadingFiles):
     def checking_valid_format(self):
         if self.get_extension not in ('txt', 'csv', 'tsv'):
             print('Invalid Format. Only .txt, .csv, .tsv format is allowed')
+            return False
         return True
 
     def get_content(self):
@@ -28,7 +29,7 @@ class ReadBytesFromFile(IReadingFiles):
                     contents = file_content.readlines()
                 return contents
             except FileNotFoundError:
-                print('This file does not exist')
+                return 'This file does not exist'
 
     def iterator(self):
         try:
@@ -56,3 +57,8 @@ class ReadBytesFromFile(IReadingFiles):
                 print(line)
         except TypeError:
             pass
+
+
+read = ReadBytesFromFile('../sample_files/lorum.csv')
+
+print(read.iterator())

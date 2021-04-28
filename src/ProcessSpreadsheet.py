@@ -1,5 +1,5 @@
 import pandas as pd
-from interface import IReadingFiles
+from src.interface import IReadingFiles
 
 
 class ProcessSpreadSheet(IReadingFiles):
@@ -21,6 +21,7 @@ class ProcessSpreadSheet(IReadingFiles):
     def checking_valid_format(self):
         if self.get_extension not in ('csv', 'tsv'):
             print('Invalid Format. Only .csv, .tsv format is allowed')
+            return False
         return True
 
     def read_content(self):
@@ -43,6 +44,8 @@ class ProcessSpreadSheet(IReadingFiles):
     def iterating_content(self):
         try:
             return next(self.iterator())
+        except StopIteration:
+            exit()
         except TypeError:
             pass
 
@@ -57,3 +60,7 @@ class ProcessSpreadSheet(IReadingFiles):
             return self.read_content().iloc[-2:]
         except AttributeError:
             pass
+
+
+pro = ProcessSpreadSheet('../sample_files/lorum.txt')
+print(pro.last_two_rows())
